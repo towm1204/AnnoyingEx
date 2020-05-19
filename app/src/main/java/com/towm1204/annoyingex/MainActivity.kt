@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.towm1204.annoyingex.manager.ApiManager
+import com.towm1204.annoyingex.manager.NotificationManager
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var apiManager: ApiManager
+    private lateinit var notificationManager: NotificationManager
     private lateinit var annoyingExApp: AnnoyingExApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         val annoyingExApp = (application as AnnoyingExApp)
         apiManager = annoyingExApp.apiManager
+        notificationManager = annoyingExApp.notificationManager
 
         // fetch data at launch
         if (savedInstanceState == null) {
@@ -24,6 +28,10 @@ class MainActivity : AppCompatActivity() {
             }, {
                 Toast.makeText(this, "Error Fetching Data", Toast.LENGTH_LONG).show()
             })
+        }
+
+        btnHereWeGoAgain.setOnClickListener {
+            notificationManager.startSendingMessage()
         }
 
 

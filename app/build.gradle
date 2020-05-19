@@ -28,6 +28,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
 }
 
 dependencies {
@@ -43,4 +47,9 @@ dependencies {
     // retrofit
     implementation "com.squareup.retrofit2:retrofit:2.8.1"
     implementation "com.squareup.retrofit2:converter-gson:2.8.1"
+
+
+    // work manager
+    implementation "androidx.work:work-runtime-ktx:2.3.4"
+
 }

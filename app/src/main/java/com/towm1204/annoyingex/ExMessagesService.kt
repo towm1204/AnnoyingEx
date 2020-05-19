@@ -6,7 +6,6 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface ExMessagesService {
-
     @GET("echeeUW/codesnippets/master/ex_messages.json")
     fun fetchMessages(): Call<Messages>
 }
