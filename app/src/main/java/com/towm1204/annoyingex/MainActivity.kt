@@ -21,6 +21,8 @@ class MainActivity : AppCompatActivity() {
         apiManager = annoyingExApp.apiManager
         notificationManager = annoyingExApp.notificationManager
 
+
+
         // fetch data at launch
         if (savedInstanceState == null) {
             apiManager.getMessages({

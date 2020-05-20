@@ -24,7 +24,7 @@ class MessageWorkManager(private val context: Context) {
                 .build()
 
             val workRequest = PeriodicWorkRequestBuilder<ExsWorker>(15, TimeUnit.MINUTES)
-                .setInitialDelay(10, TimeUnit.SECONDS)
+                .setInitialDelay(2, TimeUnit.SECONDS)
                 //.setConstraints(constraints)
                 .addTag(EX_WORKER_TAG)
                 .build()
@@ -41,10 +41,12 @@ class MessageWorkManager(private val context: Context) {
     }
 
     fun stopAllWR() {
-        if (lastWRId == null) {
-
-        } else{
+        if (lastWRId == null || !wrRunning()) {
+            Toast.makeText(context, "Ex haven't started texting yet", Toast.LENGTH_SHORT).show()
+        } else {
             workManager.cancelWorkById(lastWRId!!)
+            Toast.makeText(context, "Stopping Ex", Toast.LENGTH_SHORT).show()
+
         }
     }
 }
