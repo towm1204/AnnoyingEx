@@ -2,14 +2,14 @@ package com.towm1204.annoyingex.manager
 
 import android.app.ApplicationErrorReport
 import android.content.Context
-import androidx.work.Constraints
-import androidx.work.NetworkType
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
+import androidx.work.*
 import com.towm1204.annoyingex.ExsWorker
 import java.util.concurrent.TimeUnit
 
 class NotificationManager(private val context: Context) {
+    companion object {
+        const val EX_WORKER_TAG = "notification_manager_xD"
+    }
     private var workManager: WorkManager = WorkManager.getInstance(context)
 
     fun startSendingMessage() {
@@ -20,9 +20,14 @@ class NotificationManager(private val context: Context) {
         val workRequest = OneTimeWorkRequestBuilder<ExsWorker>()
             .setInitialDelay(5, TimeUnit.SECONDS)
             //.setConstraints(constraints)
+            .addTag(EX_WORKER_TAG)
             .build()
 
         workManager.enqueue(workRequest)
 
+    }
+
+    fun stopAllWorkers() {
+        workManager.cancelAllWorkByTag(EX_WORKER_TAG)
     }
 }

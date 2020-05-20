@@ -34,6 +34,11 @@ class MainActivity : AppCompatActivity() {
             notificationManager.startSendingMessage()
         }
 
+        btnClosure.setOnClickListener {
+            notificationManager.stopAllWorkers()
+            Toast.makeText(this, "Stopping Ex", Toast.LENGTH_SHORT).show()
+        }
+
 
 
     }
