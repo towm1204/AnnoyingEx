@@ -5,12 +5,12 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.towm1204.annoyingex.manager.ApiManager
-import com.towm1204.annoyingex.manager.NotificationManager
+import com.towm1204.annoyingex.manager.MessageWorkManager
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var apiManager: ApiManager
-    private lateinit var notificationManager: NotificationManager
+    private lateinit var notificationManager: MessageWorkManager
     private lateinit var annoyingExApp: AnnoyingExApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,8 +35,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnClosure.setOnClickListener {
-            notificationManager.stopAllWorkers()
-            Toast.makeText(this, "Stopping Ex", Toast.LENGTH_SHORT).show()
+            notificationManager.stopAllWR()
         }
 
 
