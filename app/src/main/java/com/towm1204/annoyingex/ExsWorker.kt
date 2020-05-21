@@ -9,8 +9,8 @@ import kotlin.random.Random
 class ExsWorker(private val context: Context, workParams: WorkerParameters):Worker(context, workParams) {
 
     override fun doWork(): Result {
-        val app: AnnoyingExApp = applicationContext as AnnoyingExApp
-        app.notificationManager.postNotif(app.getMessage())
+        val app: AnnoyingExApp = (applicationContext as AnnoyingExApp)
+        (applicationContext as AnnoyingExApp).notificationManager.postNotif(app.getMessage())
         return Result.success()
     }
 

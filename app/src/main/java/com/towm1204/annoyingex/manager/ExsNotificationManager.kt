@@ -26,14 +26,15 @@ class ExsNotificationManager(private val context: Context) {
     fun postNotif(textContent: String) {
         val mAIntent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            putExtra("msg", textContent)
         }
 
-        val pendingMAIntent = PendingIntent.getActivity(context, 0, mAIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingMAIntent = PendingIntent.getActivity(context, Random.nextInt(), mAIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
 
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_mood_bad_black_24dp)
-            .setContentTitle("Yo mama")
+            .setContentTitle("Erica Shee")
             .setContentText(textContent)
             .setContentIntent(pendingMAIntent)
             .setCategory(NotificationCompat.CATEGORY_MESSAGE)

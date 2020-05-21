@@ -3,6 +3,7 @@ package com.towm1204.annoyingex
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.towm1204.annoyingex.manager.ApiManager
 import com.towm1204.annoyingex.manager.MessageRequestManager
@@ -38,6 +39,10 @@ class MainActivity : AppCompatActivity() {
 
         btnClosure.setOnClickListener {
             messageRequestManager.stopAllWR()
+        }
+        if (intent.getStringExtra("msg") != null) {
+            tvNotificationFeedback.text = "Message Viewed: ${intent.getStringExtra("msg")}"
+            tvNotificationFeedback.visibility = View.VISIBLE
         }
 
 
