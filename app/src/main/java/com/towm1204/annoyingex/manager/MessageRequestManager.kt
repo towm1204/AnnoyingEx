@@ -8,12 +8,12 @@ import com.towm1204.annoyingex.ExsWorker
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class MessageWorkManager(private val context: Context) {
+class MessageRequestManager(private val context: Context) {
     companion object {
         const val EX_WORKER_TAG = "notification_manager_xD"
     }
     private var workManager: WorkManager = WorkManager.getInstance(context)
-    var lastWRId: UUID? = null
+    private var lastWRId: UUID? = null
 
     fun startSendingMessage() {
         if (lastWRId != null && wrRunning()) {
@@ -23,9 +23,9 @@ class MessageWorkManager(private val context: Context) {
                 .setRequiresCharging(true)
                 .build()
 
-            val workRequest = PeriodicWorkRequestBuilder<ExsWorker>(15, TimeUnit.MINUTES)
-                .setInitialDelay(2, TimeUnit.SECONDS)
-                //.setConstraints(constraints)
+            val workRequest = PeriodicWorkRequestBuilder<ExsWorker>(20, TimeUnit.MINUTES)
+                .setInitialDelay(5, TimeUnit.SECONDS)
+                .setConstraints(constraints)
                 .addTag(EX_WORKER_TAG)
                 .build()
 
@@ -44,7 +44,7 @@ class MessageWorkManager(private val context: Context) {
         if (lastWRId == null || !wrRunning()) {
             Toast.makeText(context, "Ex haven't started texting yet", Toast.LENGTH_SHORT).show()
         } else {
-            workManager.cancelWorkById(lastWRId!!)
+            workManager.cancelAllWorkByTag(EX_WORKER_TAG)
             Toast.makeText(context, "Stopping Ex", Toast.LENGTH_SHORT).show()
 
         }

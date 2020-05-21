@@ -5,21 +5,21 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.towm1204.annoyingex.manager.ApiManager
-import com.towm1204.annoyingex.manager.MessageWorkManager
+import com.towm1204.annoyingex.manager.MessageRequestManager
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var apiManager: ApiManager
-    private lateinit var notificationManager: MessageWorkManager
+    private lateinit var messageRequestManager: MessageRequestManager
     private lateinit var annoyingExApp: AnnoyingExApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val annoyingExApp = (application as AnnoyingExApp)
+        annoyingExApp = (application as AnnoyingExApp)
         apiManager = annoyingExApp.apiManager
-        notificationManager = annoyingExApp.notificationManager
+        messageRequestManager = annoyingExApp.messageRequestManager
 
 
 
@@ -33,11 +33,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnHereWeGoAgain.setOnClickListener {
-            notificationManager.startSendingMessage()
+            messageRequestManager.startSendingMessage()
         }
 
         btnClosure.setOnClickListener {
-            notificationManager.stopAllWR()
+            messageRequestManager.stopAllWR()
         }
 
 

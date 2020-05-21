@@ -1,21 +1,26 @@
 package com.towm1204.annoyingex
 
 import android.app.Application
+import android.app.NotificationManager
 import android.content.Context
 import androidx.work.WorkManager
 import com.towm1204.annoyingex.manager.ApiManager
-import com.towm1204.annoyingex.manager.MessageWorkManager
+import com.towm1204.annoyingex.manager.ExsNotificationManager
+import com.towm1204.annoyingex.manager.MessageRequestManager
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.random.Random
 
 class AnnoyingExApp: Application() {
-    var masterMessageList: List<String> = listOf()
+    var masterMessageList: List<String> = listOf("Unable to retrieve messages")
     lateinit var apiManager: ApiManager
-    lateinit var notificationManager: MessageWorkManager
+    lateinit var messageRequestManager: MessageRequestManager
+    lateinit var notificationManager: ExsNotificationManager
 
     override fun onCreate() {
         super.onCreate()
-        notificationManager = MessageWorkManager(this)
+        messageRequestManager = MessageRequestManager(this)
+        notificationManager = ExsNotificationManager(this)
 
         // initialize retrofit to create ExMessagesService and pass into api manager
         val retrofit = Retrofit.Builder()
@@ -24,5 +29,9 @@ class AnnoyingExApp: Application() {
             .build()
         this.apiManager = ApiManager(retrofit.create(ExMessagesService::class.java))
 
+    }
+
+    fun getMessage(): String {
+        return masterMessageList[Random.nextInt(0, masterMessageList.size + 1)]
     }
 }
